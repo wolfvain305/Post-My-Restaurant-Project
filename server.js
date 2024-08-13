@@ -4,7 +4,7 @@ const app = express()
 const methodOverride = require ('method-override')
 const mongoose = require('mongoose')
 const MONGO_URI = process.env.MONGO_URI
-const authorRouter = require('./routes/authors')
+const userRouter = require('./routes/users')
 
 mongoose.connect(MONGO_URI)
 
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.use(methodOverride('_method'))
 app.use('/assets', express.static('public'))
 
-app.use('/authors', authorRouter)
+app.use('/users', userRouter)
 
 app.listen(3000, () => {
     console.log('Running the app on 3000')
