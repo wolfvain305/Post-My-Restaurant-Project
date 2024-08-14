@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const authorCtrl = require('../controllers/users')
+const userCtrl = require('../controllers/users')
 
 
 // Index
@@ -18,4 +18,4 @@ router.get('/:id/edit', userCtrl.edit)
 // Show
 router.get('/:id', userCtrl.show)
 
-module.exports = user
+module.exports = router

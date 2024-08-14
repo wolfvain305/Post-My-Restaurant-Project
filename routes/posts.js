@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const commentsCtrl = require('../controllers/posts')
+const postCtrl = require('../controllers/posts')
 
 
 // Index
