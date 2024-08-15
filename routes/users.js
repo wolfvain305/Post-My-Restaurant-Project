@@ -7,12 +7,16 @@ const userCtrl = require('../controllers/users')
 router.get('/', userCtrl.index)
 // New
 router.get('/new', userCtrl.newFunc)
+// Sign In
+router.get('/sign-in', userCtrl.showSignIn)
 // Delete
 router.delete('/:id', userCtrl.destroy)
 // Update
 router.put('/:id', userCtrl.update)
 // Create
-router.post('/', userCtrl.create)
+router.post('/', userCtrl.signUp)
+// Sign in Functionality
+router.post('/sign-in-user', userCtrl.signIn)
 // Edit
 router.get('/:id/edit', userCtrl.edit)
 // Show

@@ -5,6 +5,7 @@ const methodOverride = require ('method-override')
 const mongoose = require('mongoose')
 const MONGO_URI = process.env.MONGO_URI
 const userRouter = require('./routes/users')
+const session = require('express-session')
 
 mongoose.connect(MONGO_URI)
 
@@ -23,6 +24,13 @@ app.use((req, res, next) => {
     next()
 })
 app.use(methodOverride('_method'))
+app.use(
+    session({
+        secret: 'process session secret should go here update your .env accordingly',
+        resave: false,
+        saveUninitialized: true,
+    })
+)
 app.use('/assets', express.static('public'))
 
 app.use('/users', userRouter)
