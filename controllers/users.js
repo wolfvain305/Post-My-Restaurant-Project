@@ -1,11 +1,13 @@
 const User = require('../models/user');
 
+
 const index = async (req, res) => {
     try {
-        const foundUsers = await AuthenticatorAssertionResponse.find({})
+        const foundUsers = await User.find({})
         res.render('users/index.ejs', {
             users: foundUsers
         })
+
     } catch (error) {
         res.status(400).json({msg:error.message})
     }
@@ -13,6 +15,7 @@ const index = async (req, res) => {
 
 const newFunc = async (req, res) => {
     res.render('users/new.ejs')
+}
 
 const destroy = async (req, res) => {
     try {
@@ -41,7 +44,7 @@ const update = async (req, res) => {
 const create = async (req, res) => {
     try {
         const createdUser = await User.create(req.body)
-        res.redirect(`/Users/${createdUser._id}`)
+        res.redirect(`/users/${createdUser._id}`)
     } catch (error) {
         res.status(400).json({msg:error.message})
     }
@@ -49,7 +52,7 @@ const create = async (req, res) => {
 
 const edit = async (req,res) => {
     try {
-        const foundUsers = await User.findOne({_id: req.params.id})
+        const foundUser = await User.findOne({_id: req.params.id})
         res.render('users/edit.ejs', {
             user: foundUser
         })
@@ -60,7 +63,7 @@ const edit = async (req,res) => {
 
 const show  = async (req,res) => {
     try {
-        const foundUsers = await User.findOne({_id: req.params.id}).populate('posts comments')
+        const foundUser = await User.findOne({_id: req.params.id}).populate('posts comments')
         res.render('users/show.ejs', {
             user: foundUser
         })
@@ -68,6 +71,7 @@ const show  = async (req,res) => {
         res.status(400).json({msg:error.message})
     }
 }
+
 module.exports = {
     index,
     newFunc,

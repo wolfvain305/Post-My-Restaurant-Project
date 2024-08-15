@@ -13,9 +13,8 @@ mongoose.connection.once('open', () => {
 })
 
 mongoose.connection.on('error', () => {
-    console.log('DOnt get mad but there is an error')
+    console.log('Dont get mad but there is an error')
 })
-
 
 
 app.use(express.urlencoded({ extended: true}))
@@ -28,6 +27,9 @@ app.use('/assets', express.static('public'))
 
 app.use('/users', userRouter)
 
+app.get('/', (req,res) => {
+    res.redirect('/users')
+})
 app.listen(3000, () => {
     console.log('Running the app on 3000')
 })

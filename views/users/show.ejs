@@ -7,19 +7,19 @@
   <title><%= user.name %> Show Page</title>
 </head>
 <body>
-  <a href="/users/<%=user._id%>/edit"><%= user.name %> edit page </a>
+  <a href="/users/<%=user._id%>/edit">edit page<%= user.name %>  </a>
   <h1><%= user.name %>'s Actvitiy</h1>
-  <h2>Post's Written</h2>
+  <h2>Post's Written by <%= user.name %></h2>
   <ul>
     <% user.posts.forEach((post) => { %>
       <li>
         <a href="/posts/<%=post._id%>">
-         <%=post.title by %> by <%= user.name %>
+         <%=post.title%> by <%= user.name %>
         </a>
       </li>
     <% }) %>
   </ul>
-  <h2>Comment's Made by <%= author.name %></h2>
+  <h2>Comment's Made by <%= user.name %></h2>
   <ul>
     <% user.comments.forEach((comment) => { %>
       <li>
