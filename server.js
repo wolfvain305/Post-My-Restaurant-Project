@@ -16,6 +16,8 @@ mongoose.connection.on('error', () => {
     console.log('DOnt get mad but there is an error')
 })
 
+
+
 app.use(express.urlencoded({ extended: true}))
 app.use((req, res, next) => {
     res.locals.data = {}
