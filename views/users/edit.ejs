@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  <title>Edit the User</title>
+</head>
+<body>
+  <h1>Edit the User</h1>
+  <form action="/users/<%= user._id%>?_method=PUT" method="POST">
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" value="<%= user.email %>"/>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value=" <%= user.name %>"/>
+    <button type="submit">Update User</button>
+  </form>
+  <a href="/users/<%= user._id %>">Back to <%= user.name %>'s Home Page</a>
+</body>
+</html>

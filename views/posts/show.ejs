@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  <title><%= post.title %></title>
+</head>
+<body>
+  <a href="/posts/<%=post._id%>/edit">edit page<%= post.title %>  </a>
+  <h1><%= post.title %>'s</h1>
+  <p><%= post.content %></p>
+  <ul>
+    <% post.comments.forEach((comment) => { %>
+      <li>
+        <a href="/posts/<%=comment.post%>">
+        <% comment.content%> by User <%= comment.user %>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

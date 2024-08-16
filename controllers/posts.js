@@ -52,15 +52,21 @@ const create = async (req, res) => {
 
 const edit = async (req,res) => {
     try {
-        
+        const foundPost = await Post.findOne({_id: req.params.id})
+        res.render('posts/edit.ejs', {
+            post: foundPost
+        })
     } catch (error) {
         res.status(400).json({msg:error.message})
     }
 }
 
-const show  = async (req,res) => {
+const show = async (req,res) => {
     try {
-        
+        const foundPost = await Post.findOne({_id: req.params.id}).populate('comments')
+        res.render('posts/show.ejs', {
+            post: foundPost
+        })
     } catch (error) {
         res.status(400).json({msg:error.message})
     }
