@@ -1,9 +1,11 @@
 const Post = require('../models/post')
+const User = require('../models/user')
+
 
 const index = async (req, res) => {
     try {
         const foundPosts = await Post.find ({})
-        res.render ('post/index', {
+        res.render ('posts/index.ejs', {
             posts: foundPosts
         })
     } catch (error) {
@@ -13,7 +15,7 @@ const index = async (req, res) => {
 
 const newFunc = async (req, res) => {
     try {
-        res.render('posts/new')
+        res.render('posts/new.ejs')
     } catch (error) {
         res.status(400).json({msg:error.message})
     }
@@ -42,9 +44,12 @@ const update = async (req, res) => {
 
 const create = async (req, res) => {
     try {
-        req.body.user = req.session.user._id
+        req.body.user = req.session.account._id
+        const foundUser = await User.findOne({_id: req.session.account._id})
         const createdPost = await Post.create(req.body)
-        res.redirect(`/posts${createdPost._id}`)
+        foundUser.posts.addToSet(createdPost)
+        await foundUser.save()
+        res.redirect(`/posts/${createdPost._id}`)
     } catch (error) {
         res.status(400).json({msg:error.message})
     }

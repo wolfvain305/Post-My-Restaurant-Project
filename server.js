@@ -5,6 +5,7 @@ const methodOverride = require ('method-override')
 const mongoose = require('mongoose')
 const MONGO_URI = process.env.MONGO_URI
 const userRouter = require('./routes/users')
+const postRouter = require('./routes/posts')
 const session = require('express-session')
 
 mongoose.connect(MONGO_URI)
@@ -34,6 +35,7 @@ app.use(
 app.use('/assets', express.static('public'))
 
 app.use('/users', userRouter)
+app.use('/posts', postRouter)
 
 app.get('/', (req,res) => {
     res.redirect('/users')

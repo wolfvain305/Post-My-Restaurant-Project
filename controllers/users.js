@@ -1,16 +1,14 @@
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 
-
-
 const signUp = async(req, res) => {
     try {
         const emailTaken = await User.findOne({ email: req.body.email})
         if(emailTaken) return res.send('Email is already in use')
-        
-        const hashedPassword =  bcrypt.hashedSync(req.body.password, 10)
+            
+        const hashedPassword =  bcrypt.hashSync(req.body.password, 10)
         req.body.password = hashedPassword
-        await User.create(req.body).then(() => res.redirect('/sign-in'))
+        await User.create(req.body).then(() => res.redirect('/users/sign-in'))
     } catch (error) {
         res.status(400).json({msg:error.message})
     }
@@ -20,7 +18,7 @@ const signUp = async(req, res) => {
 const signIn = async(req, res) => {
     try {
         const userExists = await User.findOne({ email: req.body.email})
-        if(userExists) throw new Error('User Not Found')
+        if(!userExists) throw new Error('User Not Found')
 
         const validPassword = bcrypt.compareSync(req.body.password, userExists.password)
         if(!validPassword) throw new Error('Login Failed')
@@ -35,22 +33,25 @@ const signIn = async(req, res) => {
         res.status(400).json({msg:error.message})
     }
 }
-
 const index = async (req, res) => {
     try {
         const foundUsers = await User.find({})
         res.render('users/index.ejs', {
             users: foundUsers
         })
-
     } catch (error) {
         res.status(400).json({msg:error.message})
     }
 }
 
 const newFunc = async (req, res) => {
-    res.render('users/new.ejs')
+    try {
+        res.render('users/new.ejs')
+    } catch (error) {
+        res.status(400).json({msg:error.message})
+    }
 }
+
 
 const showSignIn = async (req, res) => {
     res.render('users/signin.ejs')
@@ -80,15 +81,6 @@ const update = async (req, res) => {
     }
 }
 
-// const create = async (req, res) => {
-//     try {
-//         const createdUser = await User.create(req.body)
-//         res.redirect(`/users/${createdUser._id}`)
-//     } catch (error) {
-//         res.status(400).json({msg:error.message})
-//     }
-// }
-
 const edit = async (req,res) => {
     try {
         const foundUser = await User.findOne({_id: req.params.id})
@@ -103,6 +95,7 @@ const edit = async (req,res) => {
 const show  = async (req,res) => {
     try {
         const foundUser = await User.findOne({_id: req.params.id}).populate('posts comments')
+        console.log(foundUser)
         res.render('users/show.ejs', {
             user: foundUser
         })
@@ -116,8 +109,8 @@ module.exports = {
     newFunc,
     destroy,
     update,
-    signIn,
     signUp,
+    signIn,
     showSignIn,
     edit,
     show,
