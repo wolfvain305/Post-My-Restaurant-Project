@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const MONGO_URI = process.env.MONGO_URI
 const userRouter = require('./routes/users')
 const postRouter = require('./routes/posts')
+const commentRouter = require('./routes/comments')
 const session = require('express-session')
 
 mongoose.connect(MONGO_URI)
@@ -36,6 +37,7 @@ app.use('/assets', express.static('public'))
 
 app.use('/users', userRouter)
 app.use('/posts', postRouter)
+app.use('/comments', commentRouter)
 
 app.get('/', (req,res) => {
     res.redirect('/users')
