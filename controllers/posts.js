@@ -22,20 +22,15 @@ const newFunc = async (req, res) => {
 
 const destroy = async (req, res) => {
     try {
-        // Find and delete the post, populate comments
-        const deletedPost = await Post.findOneAndDelete({ _id: req.params.id }).populate('comments');
-        
-        // Check if there were any comments
-        if (deletedPost && deletedPost.comments.length > 0) {
-            // Delete all comments related to the post
-            await Comment.deleteMany({ _id: { $in: deletedPost.comments.map(comment => comment._id) } });
-        }
-        
-        res.redirect('/posts');
+        const deletedPost = await Post.findOneAndDelete({ _id: req.params.id }).populate('comments')
+        deletedPost.comments.forEach(comment => {
+            comment.deleteOne()
+        })
+        res.redirect('/posts')
     } catch (error) {
-        res.status(400).json({ msg: error.message });
+        res.status(400).json({ msg: error.message })
     }
-};
+}
 
 const update = async (req, res) => {
     try {
