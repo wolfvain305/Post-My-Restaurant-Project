@@ -33,6 +33,12 @@ app.use(
         saveUninitialized: true,
     })
 )
+
+app.use((req, res, next) => {
+    res.locals.user = req.session.account;
+    next();
+  });
+  
 app.use('/assets', express.static('public'))
 
 app.use('/users', userRouter)

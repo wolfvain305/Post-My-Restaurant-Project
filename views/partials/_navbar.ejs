@@ -1,6 +1,14 @@
 <nav>
-    <a href="/">Home</a>
-      <a href="/posts">All Posts</a>
-      <a href="/users/sign-in">Sign In</a>
-    
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/posts">Posts</a></li>
+      <% if (user && user._id) { %>
+        <li><a href="/posts/new">Add New Post</a></li>
+        <li><a href="/users/<%= user._id %>">My Profile</a></li>
+      <% } else { %>
+        <li><a href="/users/sign-in">Sign In</a></li>
+        <li><a href="/users/new">Sign Up</a></li>
+      <% } %>
+    </ul>
   </nav>
+  
