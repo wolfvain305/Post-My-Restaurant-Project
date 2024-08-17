@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Post = require('../models/post')
 const bcrypt = require('bcrypt')
 
 const signUp = async(req, res) => {
@@ -59,18 +60,20 @@ const showSignIn = async (req, res) => {
 
 const destroy = async (req, res) => {
     try {
-        const deletedUser = await User.findOneAndDelete({_id:  req.params.id})
+        const deletedUser = await User.findOneAndDelete({ _id: req.params.id })
         deletedUser.posts.forEach((post) => {
             post.deleteOne()
         })
-        deletedUser.comments.forEach((comment) => {
+        deletedUser.comments.forEach((comment)=> {
             comment.deleteOne()
         })
         res.redirect('/users')
+        
     } catch (error) {
-        res.status(400).json({msg:error.message})
+        res.status(400).json({ msg: error.message })
     }
 }
+
 
 const update = async (req, res) => {
     try {

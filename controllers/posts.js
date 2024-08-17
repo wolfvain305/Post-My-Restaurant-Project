@@ -27,7 +27,7 @@ const destroy = async (req, res) => {
         deletedPost.comments.forEach(comment => {
             comment.deleteOne()
         })
-        res.rediriect('/posts')
+        res.redirect('/posts')
     } catch (error) {
         res.status(400).json({msg:error.message})
     }

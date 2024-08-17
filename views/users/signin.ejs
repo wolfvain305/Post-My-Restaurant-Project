@@ -7,6 +7,7 @@
   <title>User Sign In</title>
 </head>
 <body>
+  <%- include('../partials/_navbar.ejs') %>
   <h1>Sign In!</h1>
   <form action="/users/sign-in-user" method="POST">
     <label for="email">Email:</label>
@@ -15,6 +16,6 @@
     <input type="password" name = 'password' id = 'password'>
     <button type="submit">Sign into Account</button>
   </form>
-  <a href="/users/">Back to restaurant listings!</a>
+  <a href="/users/">See All Accounts!</a>
 </body>
 </html>

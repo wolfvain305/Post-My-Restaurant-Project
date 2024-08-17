@@ -7,7 +7,11 @@
   <title>Post Index</title>
 </head>
 <body>
-  <a href="/posts/new">Add New Post</a>
+  <%- include('../partials/_navbar.ejs') %>
+  <button>
+    <a href="/posts/new">Add New Post</a>
+  </button>
+  
   <h1>All Posts</h1>
   <ul>
     <% posts.forEach((post) => { %>

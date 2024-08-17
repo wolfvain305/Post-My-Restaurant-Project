@@ -7,24 +7,30 @@
   <title><%= post.title %></title>
 </head>
 <body>
-  <a href="/posts/<%=post._id%>/edit">edit page<%= post.title %>  </a>
+  <%- include('../partials/_navbar.ejs') %>
+  <button>
+    <a href="/posts/<%=post._id%>/edit"> Edit The Post <%= post.title %>  </a>
+  </button>
+  <form action="/posts/<%=post._id%>?_method=DELETE" method="POST">
+    <button type="submit">
+      Delete Post <%= post.title %>
+    </button>
   <h1><%= post.title %>'s</h1>
   <p><%= post.content %></p>
   <ul>
     <% post.comments.forEach((comment) => { %>
       <li>
         <a href="/posts/<%=comment.post%>">
-        <% comment.content%> by User <%= comment.user %>
+         <%= comment.content %> by User <%= comment.user %>
         </a>
       </li>
     <% }) %>
   </ul>
-  <h1>Add a Comment!</h1>
-  <form action="/comments/addTo/<%= post._id%>" method="POST">
-    <label for="content">Write a comment about the post:</label>
-    <input type="text" name="content" id="content" />
-    <button type="submit">Leave a Comment</button>
+  <h2>Add a Comment!</h2>
+  <form action="/comments/addTo/<%= post._id %>" method="POST">
+    <label for="content">Leave a Comment Here:</label>
+    <input type="text" name="content" id="content"/>
+    <button type="submit">Submit</button>
   </form>
-
 </body>
 </html>

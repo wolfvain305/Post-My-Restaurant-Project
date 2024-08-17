@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/assets/css/styles.css"/>
-  <title>Edit the User</title>
+  <title>Edit the Post</title>
 </head>
 <body>
-  <h1>Edit a Post</h1>
-  <form action="/users/<%= post._id %>?_method=PUT" method="POST">
+  <%- include('../partials/_navbar.ejs') %>
+  <h1>Edit  Post</h1>
+  <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
     <label for="title">Title:</label>
     <input type="text" name="title" id="title" value="<%= post.title %>"/>
     <label for="content">Write Post Content Here:</label>

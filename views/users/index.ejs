@@ -7,7 +7,11 @@
   <title>User Index</title>
 </head>
 <body>
-  <a href="/users/new">Add New User</a>
+  <%- include('../partials/_navbar.ejs') %>
+  <button>
+    <a href="/users/new">Add New User</a>
+  </button>
+  
   <h1>All Users</h1>
   <ul>
     <% users.forEach((user) => { %>

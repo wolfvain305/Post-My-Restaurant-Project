@@ -7,6 +7,7 @@
   <title>Create an Account!</title>
 </head>
 <body>
+  <%- include('../partials/_navbar.ejs') %>
   <h1>Create an Account!</h1>
   <form action="/users" method="POST">
     <label for="email">Email:</label>
@@ -15,8 +16,8 @@
     <input type="password" name = 'password' id = 'password'>
     <label for="name">Name:</label>
     <input type="text" name="name" id="name" />
-    <button type="submit">Add User</button>
+    <button type="submit">Add a Account</button>
   </form>
-  <a href="/users/">Back to restaurant listings!</a>
+  <a href="/users/">View All Users</a>
 </body>
 </html>

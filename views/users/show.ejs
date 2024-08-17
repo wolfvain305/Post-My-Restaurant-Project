@@ -7,7 +7,14 @@
   <title><%= user.name %> Show Page</title>
 </head>
 <body>
-  <a href="/users/<%=user._id%>/edit">edit page<%= user.name %>  </a>
+  <%- include('../partials/_navbar.ejs') %>
+  <button type="submit">
+    <a href="/users/<%=user._id%>/edit"> Edit Account For <%= user.name %></a>
+  </button>
+  <form action="/users/<%=user._id%>?_method=DELETE" method="POST">
+    <button type="submit">
+      Delete <%= user.name %>'s Account'
+    </button>
   <h1><%= user.name %>'s Actvitiy</h1>
   <h2>Post's Written by <%= user.name %></h2>
   <ul>
@@ -16,9 +23,12 @@
         <a href="/posts/<%=post._id%>">
          <%=post.title%> by <%= user.name %>
         </a>
-      </li>
+      </li>      
     <% }) %>
   </ul>
+  <button>
+    <a href="../posts/new">Add New Post </a>
+  </button>
   <h2>Comment's Made by <%= user.name %></h2>
   <ul>
     <% user.comments.forEach((comment) => { %>
