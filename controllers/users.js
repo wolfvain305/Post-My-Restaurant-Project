@@ -1,12 +1,14 @@
 const User = require('../models/user')
-const Post = require('../models/post')
 const bcrypt = require('bcrypt')
+
+
 
 const signUp = async(req, res) => {
     try {
         const emailTaken = await User.findOne({ email: req.body.email})
         if(emailTaken) return res.send('Email is already in use')
             
+            //Create User
         const hashedPassword =  bcrypt.hashSync(req.body.password, 10)
         req.body.password = hashedPassword
         await User.create(req.body).then(() => res.redirect('/users/sign-in'))

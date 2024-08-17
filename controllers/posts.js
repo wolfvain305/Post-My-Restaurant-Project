@@ -1,7 +1,6 @@
 const Post = require('../models/post')
 const User = require('../models/user')
 
-
 const index = async (req, res) => {
     try {
         const foundPosts = await Post.find ({})
