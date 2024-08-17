@@ -4,10 +4,10 @@ const User = require('../models/user')
 
 const create = async (req, res) => {
     try {
-        req.body.user = req.session.user._id
+        req.body.user = req.session.account._id
         req.body.post = req.params.postId
         const comment = await Comment.create(req.body)
-        const user = await User.findOne({ _id: req.session.user._id })
+        const user = await User.findOne({ _id: req.session.account._id })
         const post = await Post.findOne({ _id: req.params.postId })    
         post.comments.addToSet(comment)
         user.comments.addToSet(comment)

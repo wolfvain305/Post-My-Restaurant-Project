@@ -16,6 +16,9 @@
     <input type="text" name="content" id="content" value=" <%= post.content %>" />
     <button type="submit">Update Post</button>
   </form>
-  <a href="/posts/<%= post._id %>"> Take you to <%= post.title %></a>
+  <button>
+    <a href="/posts/<%= post._id %>"> Take you back to <%= post.title %></a>
+  </button>
+  
 </body>
 </html>
