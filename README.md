@@ -1,4 +1,5 @@
 #  Post-My-Restaurant-Project with the theme of well ... *Restaurants*!
+![image](https://github.com/wolfvain305/Browser-Pong-Project/assets/168152251/39171ae6-2c7f-4cb5-9d2e-c69df6c11ba0)
 !![Screenshot (1)](https://github.com/user-attachments/assets/e4e3c443-b084-4490-8aed-e062d8f99315)
 
 )
